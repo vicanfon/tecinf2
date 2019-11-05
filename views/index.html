@@ -1,0 +1,271 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Factory Tech</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+	<link href="css/fount.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/slide.js"></script>
+	<script type="text/javascript" src="js/config.js"></script>
+	<script>
+	
+	/* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
+function myFunction() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
+</script>
+
+<!-- Utiliza la función listEntities de Orion, se pretendría usar la función getEntity para coger uno a uno los sensores y poder mostrarlos 
+ en las diferentes tablas, pero al no funcionar getEntity se muestran todos los sensores en las tres tablas -->
+
+<script type="text/javascript">
+var jqxhr = $.post( "http://reqhandler.vfos.uninova.pt/accessfunctionality/orion/2/tecinf/listEntities", {"vapp": "37f805f710547643b529f2ca797fab6e"})
+  .done(function( data ) {
+      var contador = 1;
+      var table = "<table>";
+      table += "<tr><th>Sensores</th><th>&nbsp;</th><th>Precisi&oacute;n</th><th>&nbsp;</th><th>Velocidad</th><th>&nbsp;</th><th>Unidades</th></tr>";
+      data.results.forEach(function(sensor) {
+          
+          var row = "<tr>";
+
+          row += "<td>";          
+          row += "Sensor " + contador;
+          row += "</td>";
+
+          var estilo1 = (sensor.precision.value>0.02)?'good':'bad';
+          row += "<td class='" + estilo1 + "'>"; 
+          row += "";
+          row += "</td>";
+          row += "<td>";
+          row += sensor.precision.value;
+          row += "</td>";
+
+          var estilo2 = (sensor.speed.value>25)?'good':'bad';          
+          row += "<td class='" + estilo2 + "'>";
+          row += "";
+          row += "</td>";
+          row += "<td>";
+          row += sensor.speed.value;
+          row += "</td>";
+
+         var estilo3 = (sensor.units.value<4)?'good':'bad';
+          row += "<td class='" + estilo3 + "'>";
+          row += "";
+          row += "</td>";
+          row += "<td>"
+          row += sensor.units.value;
+          row += "</td>";
+
+          row += "</tr>";
+        table += row;
+        contador = contador + 1;
+
+      });
+      
+      table += "</table>";
+
+      $("#sensores").append(table);
+      $("#sensores2").append(table);
+      $("#sensores3").append(table);
+      })
+  .fail(function() {
+    console.log( "error" );
+  })
+  .always(function() {
+    console.log( "finished" );
+  });
+
+</script>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-3">
+            			<a href="index.html"><img src="media/logo2.png" alt="logo" height="78" width="180"></a>
+            			</div>
+        <div class="col-md-1">
+                        
+                        <!-- clock widget start -->
+<script type="text/javascript"> var css_file=document.createElement("link"); css_file.setAttribute("rel","stylesheet"); 
+css_file.setAttribute("type","text/css"); css_file.setAttribute("href","//s.bookcdn.com//css/cl/bw-cl-120x45.css"); 
+document.getElementsByTagName("head")[0].appendChild(css_file); </script> <div id="tw_6_160913323">
+<div style="width:130px; height:45px; margin: 0 auto;"><a href="https://hotelmix.es/time/valencia-582">Valencia</a><br/></div>
+</div> <script type="text/javascript"> function setWidgetData_160913323(data){ if(typeof(data) != 'undefined' && data.results.length > 0) { for(var i = 0; i < data.results.length; ++i) { var objMainBlock = ''; var params = data.results[i]; objMainBlock = document.getElementById('tw_'+params.widget_type+'_'+params.widget_id); if(objMainBlock !== null) objMainBlock.innerHTML = params.html_code; } } } var clock_timer_160913323 = -1; </script> <script type="text/javascript" charset="UTF-8" src="https://widgets.booked.net/time/info?ver=2&domid=582&type=6&id=160913323&scode=124&city_id=582&wlangid=4&mode=1&details=0&background=ffffff&color=8c00a8&add_background=a0a1a1&add_color=08488d&head_color=8a008a&border=1&transparent=1"></script>
+<!-- clock widget end -->
+               
+        </div>
+        
+        <div class="col-md-3">
+            			<!--<div class="col-md-1"> -->
+            			<div class="topnav" id="myTopnav">
+            			     
+            			     <a href="about.html">Nosotros</a>
+            			     <a href="contact.html">Contacto</a>  
+            			     <a class="active" href="index.html">Inicio</a>
+            			     <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                             <i class="fa fa-bars"></i></a>
+                        </div>            			     
+        </div>
+         <div class="col-md-2"></div>
+    </div>
+	<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-7">
+            
+                <div class="slides">
+              <!-- Si quiero texto en las img meter cada img entre divs-->
+                    <img src="media/img1.png" alt="img1">
+        			<img src="media/img2.png" alt="img2">
+        			<img src="media/img3.png" alt="img3">
+        			
+                </div>
+
+            
+            
+      
+
+
+          <div class="col-md-2"></div>  
+        
+			<div class="card">												
+				<h5 class="card-header">L&iacute;nea de Producci&oacute;n - Proceso Corte</h5>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-md-12">
+							<!--<div class="form-inline">
+								<div class="form-group mb-2">
+									<label for="staticEmail2">Topic :</label>
+									<input type="text" class="form-control-plaintext" id="newTopic"
+										value="pt.vfos.channel.test" style="margin-left:10px">
+								</div>
+								<button class="btn btn-primary mb-2" id="btn-ChangeTopic"
+									style="margin-left:10px">change</button>
+							</div>-->
+						</div> 
+					</div>
+					</div>
+				<div class="row">
+					<div class="col-md-12">
+					<!-- Uso del componente ORION de FIWARE a través de Enablers de vfos -->
+                        <div id="sensores"></div>
+					
+					</div>
+				
+					
+				</div>
+				<h5 class="card-header">L&iacute;nea de Producci&oacute;n - Proceso Lijado</h5>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-md-12">
+							<!--<div class="form-inline">
+								<div class="form-group mb-2">
+									<label for="staticEmail2">Topic :</label>
+									<input type="text" class="form-control-plaintext" id="newTopic"
+										value="pt.vfos.channel.test" style="margin-left:10px">
+								</div>
+								<button class="btn btn-primary mb-2" id="btn-ChangeTopic"
+									style="margin-left:10px">change</button>
+							</div>-->
+						</div> 
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+					<!-- Uso del componente ORION de FIWARE a través de Enablers de vfos -->
+                        <div id="sensores2"></div>
+					
+					</div>
+				</div>
+			     <h5 class="card-header">L&iacute;nea de Producci&oacute;n - Proceso Chapado</h5>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-md-12">
+							<!--<div class="form-inline">
+								<div class="form-group mb-2">
+									<label for="staticEmail2">Topic :</label>
+									<input type="text" class="form-control-plaintext" id="newTopic"
+										value="pt.vfos.channel.test" style="margin-left:10px">
+								</div>
+								<button class="btn btn-primary mb-2" id="btn-ChangeTopic"
+									style="margin-left:10px">change</button>
+							</div>-->
+						</div> 
+					</div>
+				<div class="row">
+					<div class="col-md-12">
+					<!-- Uso del componente ORION de FIWARE a través de Enablers de vfos -->
+                        <div id="sensores3"></div>
+					
+					</div>
+				</div>
+					
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+					<!-- Uso del componente ORION de FIWARE a través de Enablers de vfos -->
+                        
+					
+					</div>
+				</div>
+					
+				
+				<div class="card-footer">
+					Dise&ntilde;ado por 
+					<a href="index.html"><img src="media/logo.png" alt="logo" height="25" width="57"></a>
+				</div>
+
+			</div>
+			<div class="btn-group" role="group">
+                 <hr>
+				<!--<button class="btn btn-secondary" type="button" id="add-btn">Actualizar</button> -->
+				<!--<button class="btn btn-secondary" type="button" id="clear-btn">Borrar</button> -->
+
+			</div>
+		</div>
+		<div class="col-md-3"></div>
+	</div>
+</div>
+	
+	<script src="js/jquery-1.9.1.min.js"></script>
+    <script src="js/jquery.slides.js"></script>
+    
+	<script>
+
+$(function(){
+  $(".slides").slidesjs({
+    play: {
+      active: true,
+        // [boolean] Generate the play and stop buttons.
+        // You cannot use your own buttons. Sorry.
+      effect: "slide",
+        // [string] Can be either "slide" or "fade".
+      interval: 5000,
+        // [number] Time spent on each slide in milliseconds.
+      auto: true,
+        // [boolean] Start playing the slideshow on load.
+      swap: false,
+        // [boolean] show/hide stop and play buttons
+      pauseOnHover: false,
+        // [boolean] pause a playing slideshow on hover
+      restartDelay: 5000
+        // [number] restart delay on inactive slideshow
+    }
+  });
+});
+ 
+	</script>
+
+<div class="md-col-4"></div>
+</body>
+</html>

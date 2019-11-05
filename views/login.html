@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<script src="js/jquery.min.js"></script>
+<script type="text/javascript">
+var jqxhr = $.post( "http://reqhandler.vfos.uninova.pt/accessfunctionality/orion/2/tecinf/listEntities", {"vapp": "37f805f710547643b529f2ca797fab6e"})
+  .done(function( data ) {
+      
+      var table = "<table>";
+      data.results.forEach(function(sensor) {
+          
+          var row = "<tr>";
+          var estilo1 = (sensor.precision.value>0)?'good':'bad';
+          row += "<td class='" + estilo1 + "'>";
+                row += ""sensor.precision.value"";
+          row += "</td>"
+          row += "<td class='" + estilo1 + "'>";
+          row += ""sensor.precision.value"";
+          row += "</td>"
+          var estilo2 = (sensor.speed.value>0)?'good':'bad';
+          row += "<td class='" + estilo2 + "'>";
+          row += sensor.speed.value;
+          row += "</td>";
+          var estilo3 = (sensor.precision.value0)?'good':'bad';
+          row += "<td class='" + estilo3 + "'>";
+          row += sensor.units.value;
+          row += "</td>";
+          row += "</tr>";
+          table += row;
+      });
+      
+      table += "</table>";
+        $("#products").append(table);
+      
+      
+  })
+  .fail(function() {
+    console.log( "error" );
+  })
+  .always(function() {
+    console.log( "finished" );
+  });
+;
+</script>
+<body>
+<style>
+
+
+</style>
+<div id="products"></div>
+
+</body>
+</html>
